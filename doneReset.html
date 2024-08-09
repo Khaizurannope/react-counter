@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Belajar React Manual</title>
+</head>
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <div id="root"></div>
+    <script type="text/babel">
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+        
+        function HomePage() {
+            const [likes, setLikes] = React.useState(0);
+
+            function handlePlus() {
+                if (likes < 11) {
+                    setLikes(likes + 1);
+                }
+            }
+
+            function handleMin() {
+                    setLikes(likes - 1);
+            }
+
+            function handleReset() {
+                setLikes(0);
+            }
+            const showDone = likes >= 11 || likes < 0;
+
+            return (
+                <>
+                    <div>
+                        <button onClick={handleMin} disabled={showDone}>-</button>
+                        <span> {showDone ? "DONE!" : likes} </span>
+                        <button onClick={handlePlus} disabled={showDone}>+</button>
+                    </div>
+                    {showDone && (
+                        <div>
+                            <button onClick={handleReset}>Reset</button>
+                        </div>
+                    )}
+                </>
+            );
+        }
+
+        root.render(<HomePage />);
+    </script>
+</body>
+</html>
